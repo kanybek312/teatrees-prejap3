@@ -108,5 +108,4 @@ public class Playfield {
     private interface BrickAction {
         void act(int i, int j, byte dot);
     }
-
 }

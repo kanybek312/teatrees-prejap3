@@ -42,4 +42,7 @@ public class Printer {
     void border(int width) {
         out.println("+" + "-".repeat(width) + "+");
     }
+    public void printPoint(String point){
+        out.println("Your score: " + point);
+    }
 }
