@@ -2,8 +2,7 @@ package com.epam.prejap.teatrees;
 
 class Score {
 
-    private final int points;
-
+    private int points;
     public Score(int points) {
         this.points = points;
     }
@@ -12,4 +11,12 @@ class Score {
         return points;
     }
 
+    int increaseScore(){
+        return ++points;
+    }
+
+    @Override
+    public String toString() {
+        return points + "";
+    }
 }
