@@ -15,32 +15,37 @@ class TeaTrees {
     private final Playfield playfield;
     private final Waiter waiter;
     private final Player player;
+    private final Printer printer;
 
-    public TeaTrees(Playfield playfield, Waiter waiter, Player player) {
+    public TeaTrees(Playfield playfield, Waiter waiter, Player player, Printer printer) {
         this.playfield = playfield;
         this.waiter = waiter;
         this.player = player;
+        this.printer = printer;
     }
-
+    /**
+     * Play the game.
+     *
+     * @return final score
+     */
     public Score play() {
         boolean moved;
-        int score = 0;
+        Score score = new Score(0);
         do {
             moved = false;
-
             playfield.nextBlock();
-            
-            waiter.decreaseCycleDelay(++score);
+            score.increaseScore();
             boolean nextMove;
             do {
                 waiter.waitForIt();
                 Move move = player.nextMove().orElse(Move.NONE);
                 moved |= (nextMove = playfield.move(move));
+                printer.printPoint(score.toString());
             } while (nextMove);
 
         } while (moved);
 
-        return new Score(score);
+        return score;
     }
 
     public static void main(String[] args) {
@@ -51,11 +56,9 @@ class TeaTrees {
         var feed = new BlockFeed();
         var printer = new Printer(System.out);
         var playfield = new Playfield(rows, cols, feed, printer);
-        var game = new TeaTrees(playfield, new Waiter(delay), new RandomPlayer(new Random()));
 
+        var game = new TeaTrees(playfield, new Waiter(delay), new RandomPlayer(new Random()), printer);
         var score = game.play();
-
-        System.out.println("Score: " + score.points());
     }
 
 }
