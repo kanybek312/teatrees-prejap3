@@ -1,5 +1,7 @@
 package com.epam.prejap.teatrees.game;
 
+import com.epam.prejap.teatrees.Score;
+
 import java.io.PrintStream;
 
 public class Printer {
@@ -42,7 +44,7 @@ public class Printer {
     void border(int width) {
         out.println("+" + "-".repeat(width) + "+");
     }
-    public void printPoint(String point){
+    void printPoint(Score point){
         out.println("Your score: " + point);
     }
 }

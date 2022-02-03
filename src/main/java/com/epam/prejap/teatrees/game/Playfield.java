@@ -1,5 +1,6 @@
 package com.epam.prejap.teatrees.game;
 
+import com.epam.prejap.teatrees.Score;
 import com.epam.prejap.teatrees.block.Block;
 import com.epam.prejap.teatrees.block.BlockFeed;
 
@@ -14,6 +15,7 @@ public class Playfield {
     private Block block;
     private int row;
     private int col;
+    private final Score score = new Score(0);
 
     public Playfield(int rows, int cols, BlockFeed feed, Printer printer) {
         this.rows = rows;
@@ -87,6 +89,8 @@ public class Playfield {
     private void show() {
         forEachBrick((i, j, dot) -> grid[row + i][col + j] = dot);
         printer.draw(grid);
+        score.increaseScore();
+        printer.printPoint(score);
     }
 
     private void doMove(int rowOffset, int colOffset) {

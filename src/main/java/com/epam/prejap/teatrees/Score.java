@@ -1,22 +1,22 @@
 package com.epam.prejap.teatrees;
 
-class Score {
+public class Score {
 
     private int points;
     public Score(int points) {
         this.points = points;
     }
 
-    int points() {
+    public int points() {
         return points;
     }
 
-    int increaseScore(){
+    public int increaseScore(){
         return ++points;
     }
 
     @Override
     public String toString() {
-        return points + "";
+        return String.valueOf(points);
     }
 }

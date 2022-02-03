@@ -24,28 +24,23 @@ class TeaTrees {
         this.printer = printer;
     }
     /**
-     * Play the game.
+     * Main game pool.
      *
      * @return final score
      */
-    public Score play() {
+    public void play() {
         boolean moved;
-        Score score = new Score(0);
         do {
             moved = false;
             playfield.nextBlock();
-            score.increaseScore();
             boolean nextMove;
             do {
                 waiter.waitForIt();
                 Move move = player.nextMove().orElse(Move.NONE);
                 moved |= (nextMove = playfield.move(move));
-                printer.printPoint(score.toString());
             } while (nextMove);
 
         } while (moved);
-
-        return score;
     }
 
     public static void main(String[] args) {
@@ -58,7 +53,7 @@ class TeaTrees {
         var playfield = new Playfield(rows, cols, feed, printer);
 
         var game = new TeaTrees(playfield, new Waiter(delay), new RandomPlayer(new Random()), printer);
-        var score = game.play();
+        game.play();
     }
 
 }
