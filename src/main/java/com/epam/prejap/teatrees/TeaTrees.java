@@ -1,5 +1,7 @@
 package com.epam.prejap.teatrees;
 
+import com.epam.prejap.teatrees.pause.Pause;
+import com.epam.prejap.teatrees.pause.PauseMonitor;
 import com.epam.prejap.teatrees.block.BlockFeed;
 import com.epam.prejap.teatrees.game.Move;
 import com.epam.prejap.teatrees.game.Playfield;
@@ -7,7 +9,7 @@ import com.epam.prejap.teatrees.game.Printer;
 import com.epam.prejap.teatrees.game.Waiter;
 import com.epam.prejap.teatrees.player.Player;
 import com.epam.prejap.teatrees.player.RandomPlayer;
-
+import java.io.InputStreamReader;
 import java.util.Random;
 
 class TeaTrees {
@@ -17,10 +19,14 @@ class TeaTrees {
     private final Player player;
     private final Printer printer;
 
-    public TeaTrees(Playfield playfield, Waiter waiter, Player player, Printer printer) {
+
+    private final PauseMonitor pauseMonitor;
+
+    public TeaTrees(Playfield playfield, Waiter waiter, Player player, Printer printer,PauseMonitor pauseMonitor) {
         this.playfield = playfield;
         this.waiter = waiter;
         this.player = player;
+        this.pauseMonitor = pauseMonitor;
         this.printer = printer;
     }
     /**
@@ -35,6 +41,7 @@ class TeaTrees {
             playfield.nextBlock();
             boolean nextMove;
             do {
+                pauseMonitor.monitor();
                 waiter.waitForIt();
                 Move move = player.nextMove().orElse(Move.NONE);
                 moved |= (nextMove = playfield.move(move));
@@ -52,8 +59,9 @@ class TeaTrees {
         var printer = new Printer(System.out);
         var playfield = new Playfield(rows, cols, feed, printer);
 
-        var game = new TeaTrees(playfield, new Waiter(delay), new RandomPlayer(new Random()), printer);
+        var waiter = new Waiter(0);
+        var game = new TeaTrees(playfield, new Waiter(delay), new RandomPlayer(new Random()), printer,
+                new PauseMonitor(new InputStreamReader(System.in), new Pause(waiter)));
         game.play();
     }
-
 }
