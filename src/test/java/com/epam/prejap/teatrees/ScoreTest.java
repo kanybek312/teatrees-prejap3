@@ -3,10 +3,6 @@ package com.epam.prejap.teatrees;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.Scanner;
-
-import static org.testng.Assert.*;
-
 @Test
 public class ScoreTest {
     Score score = new Score(0);
