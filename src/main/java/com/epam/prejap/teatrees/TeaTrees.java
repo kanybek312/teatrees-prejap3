@@ -30,7 +30,7 @@ class TeaTrees {
         this.printer = printer;
     }
     /**
-     * Main game pool.
+     * Main game loop.
      *
      * @return final score
      */
