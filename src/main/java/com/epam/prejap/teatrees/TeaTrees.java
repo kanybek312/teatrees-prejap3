@@ -39,7 +39,6 @@ class TeaTrees {
         do {
             moved = false;
             playfield.nextBlock();
-            //waiter.decreaseCycleDelay(++score);
             boolean nextMove;
             do {
                 pauseMonitor.monitor();
