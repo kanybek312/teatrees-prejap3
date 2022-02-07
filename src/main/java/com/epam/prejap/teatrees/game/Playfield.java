@@ -16,6 +16,7 @@ public class Playfield {
     Block block;
     int row;
     int col;
+    private Block hintBlock;
 
     public Playfield(int rows, int cols, BlockFeed feed, Printer printer) {
         this.rows = rows;
@@ -23,6 +24,7 @@ public class Playfield {
         this.feed = feed;
         this.printer = printer;
         grid = new Grid(new byte[rows][cols]);
+        hintBlock = feed.nextBlock();
     }
 
     /**
@@ -31,7 +33,8 @@ public class Playfield {
      */
     public void nextBlock() {
         grid.removeCompleteLines();
-        block = feed.nextBlock();
+        block = hintBlock;
+        hintBlock = feed.nextBlock();
         row = 0;
         col = (cols - block.cols()) / 2;
         show();
@@ -115,9 +118,12 @@ public class Playfield {
 
     private void show() {
         forEachBrick((i, j, dot) -> grid.fillCell(row + i, col + j, dot));
-        printer.draw(grid.getGrid());
+        printer.draw(grid.getGrid(), hintBlock);
         score.increaseScore();
         printer.printPoint(score);
+
+
+
     }
 
     private void doMove(int rowOffset, int colOffset) {
