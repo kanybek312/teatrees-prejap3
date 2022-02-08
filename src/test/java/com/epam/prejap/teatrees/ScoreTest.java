@@ -7,12 +7,12 @@ import org.testng.annotations.Test;
 
 @Test
 public class ScoreTest {
-    Score score;
-    Printer printer;
+    private Score score;
+
     @BeforeMethod
+
     public void setUp() {
         score = new Score(0);
-        printer = new Printer(System.out);
     }
 
     public void testIncreaseScore() {
@@ -24,7 +24,7 @@ public class ScoreTest {
         }
         int point = score.points();
         //then
-        Assert.assertEquals(move,point);
+        Assert.assertTrue(move == point);
     }
     public void testPrintScore(){
         // given

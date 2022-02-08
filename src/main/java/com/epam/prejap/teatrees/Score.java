@@ -1,7 +1,7 @@
 package com.epam.prejap.teatrees;
 
 /**
- * To score the game
+ * To score the game.
  * @see com.epam.prejap.teatrees.game.Playfield
  */
 public class Score {
@@ -11,14 +11,14 @@ public class Score {
         this.points = points;
     }
     /**
-     *
-     * @return points
+     * With this method gets points.
+     * @return points as int.
      */
     public int points() {
         return points;
     }
     /**
-     * increase point
+     * It increases points.
      *
      * @return increased score
      */
