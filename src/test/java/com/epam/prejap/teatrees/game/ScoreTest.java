@@ -1,35 +1,34 @@
-package com.epam.prejap.teatrees;
+package com.epam.prejap.teatrees.game;
 
-import com.epam.prejap.teatrees.game.Printer;
 import org.testng.*;
 import org.testng.annotations.*;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Random;
 
+import static java.lang.System.*;
 import static org.testng.Assert.*;
 
-
-/**
- * Print string to this class
- * tpo check if there is anything or score appears int
- * collect output of application single string
- *
- * **/
 
 @Test
 public class ScoreTest {
     private Score score;
-    private Printer printer;
+    private ByteArrayOutputStream expected;
     private ByteArrayOutputStream actual;
+    private Printer printer;
 
     @BeforeMethod
-
     public void setUp() {
         score = new Score(0);
-        printer = printer = new Printer(new PrintStream(actual, true));
+        expected = new ByteArrayOutputStream();
+        actual = new ByteArrayOutputStream();
+        printer = new Printer(new PrintStream(actual, true));
+        System.setOut(new PrintStream(expected, true));
     }
-
+    @AfterMethod
+    private void cleanup() {
+        System.setOut(System.out);
+    }
     public void testIncreaseScore() {
         // given
         int  move = 10;
@@ -39,19 +38,20 @@ public class ScoreTest {
         }
         int point = score.points();
         //then
-        assertTrue(move == point);
+        assertEquals(move, point);
     }
     public void testPrintScore(){
         // given
-        System.setOut(System.out);
-        String  move = "56";
-        System.out.println(printer);
+
+        int point = new Random().nextInt(100) - 1;
+
         //when
-        for (int i = 0; i < 56; i++) {
+        for (int i = 0; i < point; i++) {
             score.increaseScore();
         }
-        String point = score.toString();
+        printer.printPoint(score);
+
         //then
-        Assert.assertEquals(move, point);
+        assertEquals(actual.toString(),"Your score: "+ point + lineSeparator());
     }
 }

@@ -1,6 +1,5 @@
 package com.epam.prejap.teatrees.game;
 
-import com.epam.prejap.teatrees.Score;
 import com.epam.prejap.teatrees.block.Block;
 import com.epam.prejap.teatrees.block.BlockFeed;
 import com.epam.prejap.teatrees.block.RotatedBlock;

@@ -1,10 +1,10 @@
-package com.epam.prejap.teatrees;
+package com.epam.prejap.teatrees.game;
 
 /**
  * To score the game.
  * @see com.epam.prejap.teatrees.game.Playfield
  */
-public class Score {
+class Score {
 
     private int points;
     public Score(int points) {

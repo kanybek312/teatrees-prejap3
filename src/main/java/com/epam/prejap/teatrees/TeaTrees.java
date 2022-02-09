@@ -18,8 +18,6 @@ class TeaTrees {
     private final Waiter waiter;
     private final Player player;
     private final Printer printer;
-
-
     private final PauseMonitor pauseMonitor;
 
     public TeaTrees(Playfield playfield, Waiter waiter, Player player, Printer printer,PauseMonitor pauseMonitor) {

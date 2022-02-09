@@ -1,14 +1,9 @@
 package com.epam.prejap.teatrees.game;
-
-
-import com.epam.prejap.teatrees.Score;
 import com.epam.prejap.teatrees.block.Block;
 import java.io.PrintStream;
 
 public class Printer {
-
     final PrintStream out;
-
     public Printer(PrintStream out) {
         this.out = out;
     }
